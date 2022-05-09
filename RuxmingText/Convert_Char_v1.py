@@ -1,5 +1,5 @@
 import binascii
-DEBUG = False
+DEBUG = True
 
 def hexStr_to_str(hex_str):
     hex = hex_str.encode('utf-8')
@@ -34,20 +34,36 @@ def Obtain16Char(input, symb=r'=' ):
 
 def Validate16Char(input, symb=r'=' ):
     ret = ""; count=0
-    idx = 0
+    idx = 0; stack = []
     try:
         for ary in input:
             if(DEBUG):print(idx, "ary>", type(ary), ary, symb)
             if(ary == symb):
                 count += 1
+                if(len(stack)>1):
+                    if(DEBUG): print("Pop", stack[-1], ary, stack)
+                    if(stack[-1]==ary):
+                        stack.pop()
+                        continue
                 if(DEBUG): print(len(input),"ret>", ret, input[idx+1])
                 if(len(input)>(idx+1)):
                     if (len(input) > (idx +2)):
+
                         if( input[idx-3] == symb):
+                            count += 1
                             if(input[idx-6] == symb ):
+                                count += 1
                                 if(count==3):
+                                    stack.append(input[idx - 1])
+                                    stack.append(input[idx - 2])
+                                    stack.append(input[idx - 4])
+                                    stack.append(input[idx-5])
                                     ret += input[idx-5] + input[idx-4] + input[idx-2] + input[idx -1] + input[idx + 1] + input[idx + 2]
                                     count = 0
+                            else:
+                                count = 0
+                        else:
+                            count = 0
             idx += 1
     except Exception as ex:
         print(ex)
