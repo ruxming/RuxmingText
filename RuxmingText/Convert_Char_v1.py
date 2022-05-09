@@ -40,11 +40,11 @@ def Validate16Char(input, symb=r'=' ):
             if(DEBUG):print(idx, "ary>", type(ary), ary, symb)
             if(ary == symb):
                 count += 1
-                if(len(stack)>1):
-                    if(DEBUG): print("Pop", stack[-1], ary, stack)
-                    if(stack[-1]==ary):
-                        stack.pop()
-                        continue
+                # if(len(stack)>1):
+                #     if(DEBUG): print("Pop", stack[-1], ary, stack)
+                #     if(stack[-1]==ary):
+                #         stack.pop()
+                #         continue
                 if(DEBUG): print(len(input),"ret>", ret, input[idx+1])
                 if(len(input)>(idx+1)):
                     if (len(input) > (idx +2)):
@@ -60,10 +60,10 @@ def Validate16Char(input, symb=r'=' ):
                                     stack.append(input[idx-5])
                                     ret += input[idx-5] + input[idx-4] + input[idx-2] + input[idx -1] + input[idx + 1] + input[idx + 2]
                                     count = 0
-                            else:
-                                count = 0
-                        else:
-                            count = 0
+                        #     else:
+                        #         count = 0
+                        # else:
+                        #     count = 0
             idx += 1
     except Exception as ex:
         print(ex)
